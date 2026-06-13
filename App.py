@@ -22,7 +22,7 @@ def load_model():
         "text-classification",
         model="nataliatw/indobert-spam-detector",   
         tokenizer="nataliatw/indobert-spam-detector",
-        return_all_scores=True
+        top_k= None
     )
     return pipe
 
@@ -85,7 +85,11 @@ with col2:
 
     if run:
 
-        raw = pipe(text)[0] 
+        # raw = pipe(text)[0] 
+
+        raw = pipe(text)
+        st.write(raw)
+        st.stop()
 
         non_spam_score = [x["score"] for x in raw if x["label"] == "LABEL_0"][0]
         spam_score     = [x["score"] for x in raw if x["label"] == "LABEL_1"][0]
