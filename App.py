@@ -85,10 +85,10 @@ with col2:
 
     if run:
 
-        raw = pipe(text)[0]
+        raw = pipe(text)[0] 
 
-        non_spam_score = [x for x in raw if x["label"] == "LABEL_0"][0]["score"]
-        spam_score     = [x for x in raw if x["label"] == "LABEL_1"][0]["score"]
+        non_spam_score = [x["score"] for x in raw if x["label"] == "LABEL_0"][0]
+        spam_score     = [x["score"] for x in raw if x["label"] == "LABEL_1"][0]
 
         final_label = "SPAM" if spam_score > non_spam_score else "NON-SPAM"
         final_score = max(spam_score, non_spam_score)
