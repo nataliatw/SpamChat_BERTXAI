@@ -37,13 +37,15 @@ explainer = LimeTextExplainer(class_names=class_names)
 def predict_proba(texts):
     outputs = pipe(texts)
 
-    # outputs = [[{"label":"LABEL_0", "score":...}, {"label":"LABEL_1", "score":...}], ...]
     probs = []
 
     for out in outputs:
-        non_spam = [x for x in out if x["label"] == "LABEL_0"][0]["score"]
-        spam =     [x for x in out if x["label"] == "LABEL_1"][0]["score"]
-        probs.append([non_spam, spam])
+        scores = {item["label"]: item["score"] for item in out}
+
+        probs.append([
+            scores["LABEL_0"],
+            scores["LABEL_1"]
+        ])
 
     return np.array(probs)
 
@@ -85,14 +87,12 @@ with col2:
 
     if run:
 
-        # raw = pipe(text)[0] 
+        raw = pipe([text])[0]
 
-        raw = pipe(text)
-        st.write(raw)
-        st.stop()
+        scores = {item["label"]: item["score"] for item in raw}
 
-        non_spam_score = [x["score"] for x in raw if x["label"] == "LABEL_0"][0]
-        spam_score     = [x["score"] for x in raw if x["label"] == "LABEL_1"][0]
+        non_spam_score = scores["LABEL_0"]
+        spam_score = scores["LABEL_1"]
 
         final_label = "SPAM" if spam_score > non_spam_score else "NON-SPAM"
         final_score = max(spam_score, non_spam_score)
