@@ -161,6 +161,20 @@ with col2:
             unsafe_allow_html=True
         )
 
+        st.markdown("""
+        <div style="background:white; padding:10px; border-radius:8px;
+                    box-shadow:0 2px 6px rgba(0,0,0,0.08); margin-top:10px;
+                    font-size:13px;">
+            <b>Keterangan Warna:</b><br>
+            <span style="background:rgba(255,0,0,0.3); padding:3px 8px; 
+                        border-radius:4px;">■</span> Mendorong ke SPAM &nbsp;&nbsp;
+            <span style="background:rgba(0,200,0,0.3); padding:3px 8px; 
+                        border-radius:4px;">■</span> Mendorong ke NON-SPAM &nbsp;&nbsp;
+            <span style="background:rgba(255,255,0,0.3); padding:3px 8px; 
+                        border-radius:4px;">■</span> Netral
+        </div>
+        """, unsafe_allow_html=True)
+
 
 # ============================
 # KOLOM 3 — SCORE TABEL
