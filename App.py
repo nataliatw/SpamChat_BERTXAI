@@ -37,10 +37,15 @@ explainer = LimeTextExplainer(class_names=class_names)
 def predict_proba(texts):
     outputs = pipe(texts)
 
+    st.write("OUTPUTS =", outputs)
+
     probs = []
 
     for out in outputs:
-        scores = {item["label"]: item["score"] for item in out}
+        st.write("OUT =", out)
+        st.write(type(out))
+
+        scores = {x["label"]: x["score"] for x in out}
 
         probs.append([
             scores["LABEL_0"],
