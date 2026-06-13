@@ -32,7 +32,7 @@ pipe = load_model()
 # LIME preparation
 # ===================================================
 class_names = ["NON-SPAM", "SPAM"]
-explainer = LimeTextExplainer(class_names=class_names)
+explainer = LimeTextExplainer(class_names=class_names, random_state=42)
 
 def predict_proba(texts):
     outputs = pipe(texts)
