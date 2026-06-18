@@ -22,7 +22,9 @@ def load_model():
         "text-classification",
         model="nataliatw/indobert-spam-detector",   
         tokenizer="nataliatw/indobert-spam-detector",
-        top_k= None
+        top_k= None,
+        truncation=True,
+        max_length=128
     )
     return pipe
 
